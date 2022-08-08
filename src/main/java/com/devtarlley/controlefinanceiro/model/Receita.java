@@ -1,10 +1,17 @@
 package com.devtarlley.controlefinanceiro.model;
 
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Table(name = "receitas")
 public class Receita {
     @Id
@@ -20,37 +27,5 @@ public class Receita {
 
     @Column(name = "DATA", nullable = false)
     private LocalDate data;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
 
 }

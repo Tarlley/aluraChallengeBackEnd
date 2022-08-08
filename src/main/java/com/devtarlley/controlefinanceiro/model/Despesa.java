@@ -1,9 +1,18 @@
 package com.devtarlley.controlefinanceiro.model;
 
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Table(name = "despesas")
 public class Despesa {
     @Id
@@ -18,38 +27,6 @@ public class Despesa {
     private Double valor;
 
     @Column(name = "DATA", nullable = false)
-    private Instant data;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Instant getData() {
-        return data;
-    }
-
-    public void setData(Instant data) {
-        this.data = data;
-    }
+    private LocalDate data;
 
 }
