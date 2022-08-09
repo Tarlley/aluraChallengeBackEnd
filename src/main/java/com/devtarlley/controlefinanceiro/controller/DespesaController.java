@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/despesas")
@@ -20,7 +22,7 @@ public class DespesaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> salvarDespesa(@RequestBody Despesa receita){
+    public ResponseEntity<?> salvarDespesa(@Valid @RequestBody Despesa receita){
         return receitaService.salvarDespesa(receita);
     }
 
@@ -29,7 +31,7 @@ public class DespesaController {
         return receitaService.buscarDespesaPorId(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarDespesa(@PathVariable("id") Integer id,@RequestBody Despesa receita){
+    public ResponseEntity<?> atualizarDespesa(@Valid @PathVariable("id") Integer id,@RequestBody Despesa receita){
         return receitaService.atualizarDespesa(id,receita);
     }
 

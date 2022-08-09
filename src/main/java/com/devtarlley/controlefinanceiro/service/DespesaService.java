@@ -1,11 +1,14 @@
 package com.devtarlley.controlefinanceiro.service;
 
+import com.devtarlley.controlefinanceiro.enums.Categorias;
 import com.devtarlley.controlefinanceiro.model.Despesa;
 import com.devtarlley.controlefinanceiro.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import static com.devtarlley.controlefinanceiro.enums.Categorias.OUTRAS;
 
 @Service
 public class DespesaService {
@@ -25,6 +28,10 @@ public class DespesaService {
 
             if (despesaExistente != null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Despesa já cadastrada");
+            }
+
+            if (despesa.getCategoria() == null){
+                despesa.setCategoria(OUTRAS);
             }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(despesaRepository.saveAndFlush(despesa));
