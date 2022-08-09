@@ -14,29 +14,34 @@ import javax.validation.Valid;
 public class DespesaController {
 
     @Autowired
-    private DespesaService receitaService;
+    private DespesaService despesaService;
 
     @GetMapping
     public ResponseEntity<?> buscarTodasDespesas(@RequestParam(required = false) String descricao){
-        return receitaService.buscarTodasDespesas(descricao);
+        return despesaService.buscarTodasDespesas(descricao);
     }
 
     @PostMapping
-    public ResponseEntity<?> salvarDespesa(@Valid @RequestBody Despesa receita){
-        return receitaService.salvarDespesa(receita);
+    public ResponseEntity<?> salvarDespesa(@Valid @RequestBody Despesa despesa){
+        return despesaService.salvarDespesa(despesa);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarDespesaPorId(@PathVariable("id") Integer id){
-        return receitaService.buscarDespesaPorId(id);
+        return despesaService.buscarDespesaPorId(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarDespesa(@Valid @PathVariable("id") Integer id,@RequestBody Despesa receita){
-        return receitaService.atualizarDespesa(id,receita);
+    public ResponseEntity<?> atualizarDespesa(@Valid @PathVariable("id") Integer id,@RequestBody Despesa despesa){
+        return despesaService.atualizarDespesa(id,despesa);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletarDespesa(@PathVariable("id") Integer id){
-        return receitaService.deletarDespesa(id);
+        return despesaService.deletarDespesa(id);
+    }
+
+    @GetMapping("/{ano}/{mes}")
+    public ResponseEntity<?> buscarDespesasPorAnoEMes(@PathVariable("ano")Integer ano,@PathVariable("mes")Integer mes){
+        return despesaService.buscarReceitasPorAnoEMes(ano,mes);
     }
 }

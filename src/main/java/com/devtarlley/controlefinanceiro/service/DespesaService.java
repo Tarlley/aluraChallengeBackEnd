@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.devtarlley.controlefinanceiro.enums.Categorias.OUTRAS;
 
 @Service
@@ -65,5 +67,10 @@ public class DespesaService {
     public ResponseEntity<?> deletarDespesa(Integer id) {
         despesaRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    public ResponseEntity<?> buscarReceitasPorAnoEMes(Integer ano, Integer mes) {
+        List<Despesa> despesas = despesaRepository.buscarReceitasPorAnoEMes(ano, mes);
+        return despesas.isEmpty()?ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.OK).body(despesas);
     }
 }
