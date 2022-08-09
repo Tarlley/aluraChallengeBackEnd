@@ -9,4 +9,6 @@ import java.util.List;
 public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
     @Query(value = "SELECT * FROM DESPESAS WHERE MONTH(DATA) = ?1",nativeQuery = true)
     List<Despesa> buscarDespesaPorMes(Integer month);
+
+    List<Despesa> findByDescricao(String descricao);
 }

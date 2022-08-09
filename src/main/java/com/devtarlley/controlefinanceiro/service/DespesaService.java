@@ -1,6 +1,5 @@
 package com.devtarlley.controlefinanceiro.service;
 
-import com.devtarlley.controlefinanceiro.enums.Categorias;
 import com.devtarlley.controlefinanceiro.model.Despesa;
 import com.devtarlley.controlefinanceiro.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,10 @@ public class DespesaService {
     @Autowired
     private DespesaRepository despesaRepository;
 
-    public ResponseEntity<?> buscarTodasDespesas(){
-        return ResponseEntity.status(HttpStatus.OK).body(despesaRepository.findAll());
+    public ResponseEntity<?> buscarTodasDespesas(String descricao){
+        return (descricao == null)?
+                ResponseEntity.status(HttpStatus.OK).body(despesaRepository.findAll()):
+                ResponseEntity.status(HttpStatus.OK).body(despesaRepository.findByDescricao(descricao));
     }
 
     public ResponseEntity<?> salvarDespesa(Despesa despesa) {

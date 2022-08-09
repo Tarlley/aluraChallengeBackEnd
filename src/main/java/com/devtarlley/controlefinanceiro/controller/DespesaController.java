@@ -17,8 +17,8 @@ public class DespesaController {
     private DespesaService receitaService;
 
     @GetMapping
-    public ResponseEntity<?> buscarTodasDespesas(){
-        return receitaService.buscarTodasDespesas();
+    public ResponseEntity<?> buscarTodasDespesas(@RequestParam(required = false) String descricao){
+        return receitaService.buscarTodasDespesas(descricao);
     }
 
     @PostMapping

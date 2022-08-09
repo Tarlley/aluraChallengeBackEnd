@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/receitas")
@@ -21,7 +23,7 @@ public class ReceitaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> salvarReceita(@RequestBody Receita receita){
+    public ResponseEntity<?> salvarReceita(@Valid @RequestBody Receita receita){
         return receitaService.salvarReceita(receita);
     }
 
@@ -30,7 +32,7 @@ public class ReceitaController {
         return receitaService.buscarReceitaPorId(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarReceita(@PathVariable("id") Integer id,@RequestBody Receita receita){
+    public ResponseEntity<?> atualizarReceita(@Valid @PathVariable("id") Integer id,@RequestBody Receita receita){
         return receitaService.atualizarReceita(id,receita);
     }
 
