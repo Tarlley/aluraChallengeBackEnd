@@ -16,8 +16,8 @@ public class ReceitaController {
     private ReceitaService receitaService;
 
     @GetMapping
-    public ResponseEntity<?> buscarTodasReceitas(){
-        return receitaService.buscarTodasReceitas();
+    public ResponseEntity<?> buscarTodasReceitas(@RequestParam(required = false) String descricao){
+        return receitaService.buscarTodasReceitas(descricao);
     }
 
     @PostMapping

@@ -13,8 +13,12 @@ public class ReceitaService {
     @Autowired
     private ReceitaRepository receitaRepository;
 
-    public ResponseEntity<?> buscarTodasReceitas(){
-        return ResponseEntity.status(HttpStatus.OK).body(receitaRepository.findAll());
+    public ResponseEntity<?> buscarTodasReceitas(String descricao){
+        if (descricao == null){
+            return ResponseEntity.status(HttpStatus.OK).body(receitaRepository.findAll());
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(receitaRepository.findByDescricao(descricao));
+        }
     }
 
     public ResponseEntity<?> salvarReceita(Receita receita) {

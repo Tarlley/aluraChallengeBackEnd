@@ -10,4 +10,6 @@ import java.util.List;
 public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
     @Query(value = "SELECT * FROM RECEITAS WHERE MONTH(DATA) = ?1",nativeQuery = true)
     List<Receita> buscarReceitaPorMes(Integer month);
+
+    List<Receita> findByDescricao(String descricao);
 }
