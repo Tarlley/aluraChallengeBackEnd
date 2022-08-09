@@ -23,7 +23,7 @@ public class ReceitaService {
 
     public ResponseEntity<?> salvarReceita(Receita receita) {
         try {
-            Receita receitaExistente = receitaRepository.buscarReceitaPorMes(receita.getData().getMonth().getValue())
+            Receita receitaExistente = receitaRepository.buscarReceitaPorAnoEMes(receita.getData().getYear(),receita.getData().getMonth().getValue())
                     .stream()
                     .filter(item -> item.getDescricao().equals(receita.getDescricao())).findAny().orElse(null);
 
@@ -43,7 +43,7 @@ public class ReceitaService {
 
     public ResponseEntity<?>  atualizarReceita(Integer id,Receita receita) {
         try {
-            Receita receitaExistente = receitaRepository.buscarReceitaPorMes(receita.getData().getMonth().getValue())
+            Receita receitaExistente = receitaRepository.buscarReceitaPorAnoEMes(receita.getData().getYear(),receita.getData().getMonth().getValue())
                     .stream()
                     .filter(item -> item.getDescricao().equals(receita.getDescricao())).findAny().orElse(null);
 
@@ -67,5 +67,9 @@ public class ReceitaService {
         List<Receita> receitas = receitaRepository.buscarReceitasPorAnoEMes(ano, mes);
         return receitas.isEmpty()? ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.OK).body(receitas);
 
+    }
+
+    public Double buscarValorReceitaPorAnoEMes(Integer ano,Integer mes){
+        return receitaRepository.buscarValorReceitaPorAnoEMes(ano,mes);
     }
 }

@@ -25,7 +25,7 @@ public class DespesaService {
 
     public ResponseEntity<?> salvarDespesa(Despesa despesa) {
         try {
-            Despesa despesaExistente = despesaRepository.buscarDespesaPorMes(despesa.getData().getMonth().getValue())
+            Despesa despesaExistente = despesaRepository.buscarDespesaPorAnoEMes(despesa.getData().getYear(),despesa.getData().getMonth().getValue())
                     .stream()
                     .filter(item -> item.getDescricao().equals(despesa.getDescricao())).findAny().orElse(null);
 
@@ -49,7 +49,7 @@ public class DespesaService {
 
     public ResponseEntity<?>  atualizarDespesa(Integer id,Despesa despesa) {
         try {
-            Despesa despesaExistente = despesaRepository.buscarDespesaPorMes(despesa.getData().getMonth().getValue())
+            Despesa despesaExistente = despesaRepository.buscarDespesaPorAnoEMes(despesa.getData().getYear(),despesa.getData().getMonth().getValue())
                     .stream()
                     .filter(item -> item.getDescricao().equals(despesa.getDescricao())).findAny().orElse(null);
 
@@ -72,5 +72,13 @@ public class DespesaService {
     public ResponseEntity<?> buscarReceitasPorAnoEMes(Integer ano, Integer mes) {
         List<Despesa> despesas = despesaRepository.buscarReceitasPorAnoEMes(ano, mes);
         return despesas.isEmpty()?ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.OK).body(despesas);
+    }
+
+    public Double buscarValorDespesaPorAnoEMes(Integer ano,Integer mes){
+        return despesaRepository.buscarValorReceitaPorAnoEMes(ano,mes);
+    }
+
+    public List<Despesa> buscarResumoPorCategoria(Integer ano, Integer mes) {
+        return despesaRepository.buscarResumoPorCategoria(ano,mes);
     }
 }
