@@ -12,4 +12,7 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
     List<Receita> buscarReceitaPorMes(Integer month);
 
     List<Receita> findByDescricao(String descricao);
+
+    @Query(value = "SELECT * FROM RECEITAS WHERE MONTH(DATA) = ?2 AND year(DATA) = ?1",nativeQuery = true)
+    List<Receita> buscarReceitasPorAnoEMes(Integer ano,Integer mes);
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReceitaService {
 
@@ -59,5 +61,11 @@ public class ReceitaService {
     public ResponseEntity<?> deletarReceita(Integer id) {
         receitaRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    public ResponseEntity<?> buscarReceitasPorAnoEMes(Integer ano, Integer mes) {
+        List<Receita> receitas = receitaRepository.buscarReceitasPorAnoEMes(ano, mes);
+        return receitas.isEmpty()? ResponseEntity.status(HttpStatus.NO_CONTENT).build():ResponseEntity.status(HttpStatus.OK).body(receitas);
+
     }
 }

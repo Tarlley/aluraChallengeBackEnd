@@ -40,4 +40,9 @@ public class ReceitaController {
     public ResponseEntity<?> deletarReceita(@PathVariable("id") Integer id){
         return receitaService.deletarReceita(id);
     }
+
+    @GetMapping("/{ano}/{mes}")
+    public ResponseEntity<?> buscarReceitasPorAnoEMes(@PathVariable("ano") Integer ano, @PathVariable("mes")Integer mes){
+        return receitaService.buscarReceitasPorAnoEMes(ano,mes);
+    }
 }
