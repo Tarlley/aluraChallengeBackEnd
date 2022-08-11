@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
-    @Query(value = "SELECT * FROM DESPESAS where year(DATA) = ?1 and month(DATA) = ?2",nativeQuery = true)
-    List<Despesa> buscarDespesaPorAnoEMes(Integer ano, Integer mes);
+    @Query(value = "SELECT * FROM DESPESAS where year(DATA) = ?1 and month(DATA) = ?2 and descricao = ?3",nativeQuery = true)
+    List<Despesa> buscarDespesaPorAnoEMes(Integer ano, Integer mes,String descricao);
 
     List<Despesa> findByDescricao(String descricao);
 
