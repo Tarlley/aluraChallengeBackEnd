@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class ReceitaService {
 
+    private final ReceitaRepository receitaRepository;
+
     @Autowired
-    private ReceitaRepository receitaRepository;
+    public ReceitaService(ReceitaRepository receitaRepository) {
+        this.receitaRepository = receitaRepository;
+    }
 
     public ResponseEntity<?> buscarTodasReceitas(String descricao){
          return (descricao == null)?

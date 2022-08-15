@@ -14,8 +14,12 @@ import static com.devtarlley.controlefinanceiro.enums.Categorias.OUTRAS;
 @Service
 public class DespesaService {
 
+    private final DespesaRepository despesaRepository;
+
     @Autowired
-    private DespesaRepository despesaRepository;
+    public DespesaService(DespesaRepository despesaRepository) {
+        this.despesaRepository = despesaRepository;
+    }
 
     public List<Despesa> buscarTodasDespesas(String descricao){
         return (descricao == null)?despesaRepository.findAll():despesaRepository.findByDescricao(descricao);
